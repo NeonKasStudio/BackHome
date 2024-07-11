@@ -20,6 +20,15 @@ public class NewBehaviourScript : MonoBehaviour
     private void OnEnable()
     {
         ServingZoneTrigger.OnCanEntered += HandleCanEntered;
+        ServingZoneTrigger.OnCanExited += HandleCanExited;
+    }
+
+    private void OnDisable()
+    {
+        ServingZoneTrigger.OnCanEntered -= HandleCanEntered;
+        ServingZoneTrigger.OnCanExited -= HandleCanExited;
+
+
     }
 
 
@@ -29,37 +38,32 @@ public class NewBehaviourScript : MonoBehaviour
 
 
 
-        if (other.gameObject.name == "Can")
-        {
-            Debug.Log("SOY una lata y estoy servida");
-            isCanServed = true;
-        }
+        
 
         if (other.CompareTag("Player"))
         {
             if (Input.GetKey(KeyCode.E) ) {
-                if (!releasingCan && !isCanServed)
+                if (!releasingCan)
                 {
                     if (GrabSystem.Instance.GetCurrentObjectType() == GrabableObject.ObjectType.Coin  )
-                {
-                    Debug.Log("SOY una persona con un euro");
-                    Debug.Log("La lata esta servida: " + isCanServed);
-
-                    if (!releasingCan && !isCanServed)
                     {
+                        Debug.Log("SOY una persona con un euro");
+                        Debug.Log("La lata esta servida: " + isCanServed);
+
+                    
                         if (!InsertingCoinSound.isPlaying)
                             InsertingCoinSound.Play();
 
                         GrabSystem.Instance.DeleteCurrentObject();
                         StartCoroutine(ReleaseCan());
                     }
-                    
-                }
-                else
-                {
-                    StartCoroutine(ActivateSign());
-                }
+                    else
+                    {
+                        StartCoroutine(ActivateSign());
                     }
+
+
+                }
             }
             
                
@@ -73,12 +77,19 @@ public class NewBehaviourScript : MonoBehaviour
     {
         isCanServed = true;
     }
+    private void HandleCanExited(Collider other)
+    {
+        isCanServed = false;
+    }
+
     private IEnumerator ReleaseCan()
     {
         releasingCan = true;
         yield return new WaitForSeconds(5.0f);
         Debug.Log("Suelto lata");
         Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
+        releasingCan = false;
+
 
     }
 

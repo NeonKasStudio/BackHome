@@ -48,7 +48,6 @@ public class GrabSystem : MonoBehaviour
             currentGrabableObject = pickedUpObject;
 
             // Mover el objeto a la mano del jugador
-            Transform playerHand = GameObject.FindWithTag("Player").transform.Find("Hand");
             pickedUpObject.transform.SetParent(playerHand);
             pickedUpObject.transform.localPosition = Vector3.zero;
             pickedUpObject.transform.localRotation = Quaternion.identity;
@@ -75,6 +74,7 @@ public class GrabSystem : MonoBehaviour
             rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
 
             hasBeenThrown = true;
+
 
             //currentGrabableObject.PlayFallingSound();
             // Limpiar la referencia al objeto recogido

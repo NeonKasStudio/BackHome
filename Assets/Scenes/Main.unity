@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2161.8137, g: 2265.723, b: 3288.9106, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -822,6 +822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 474034646}
   - component: {fileID: 474034647}
+  - component: {fileID: 474034648}
   m_Layer: 0
   m_Name: Triggerzone
   m_TagString: Untagged
@@ -863,8 +864,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2.7590113, z: 1}
+  m_Center: {x: 0, y: 0.87950635, z: 0}
+--- !u!114 &474034648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474034645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7990ffdf9a65b7442b0bf1e8b7b3820e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &515712232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,79 +1034,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHand: {fileID: 2018197056}
   hasBeenThrown: 0
---- !u!1001 &628831820
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 571938693859056164, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c28947dfabe253044b91a7146ac98ecc, type: 3}
-    - target: {fileID: 8095244623280139838, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_Name
-      value: Can
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.957955
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 15.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125827511972169683, guid: d9561cca2eccc194faacca4a971e6026,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9561cca2eccc194faacca4a971e6026, type: 3}
 --- !u!82 &642343786 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1856217667861577337, guid: d95d7fe51c5cb134d8150c84a750996b,
@@ -1497,7 +1437,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816990350}
   serializedVersion: 4
-  m_Mass: 300
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1961,4 +1901,3 @@ SceneRoots:
   - {fileID: 1816990354}
   - {fileID: 7720538033358211783}
   - {fileID: 25791094}
-  - {fileID: 628831820}
