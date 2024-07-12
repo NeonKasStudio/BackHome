@@ -11,8 +11,6 @@ public class GrabSystem : MonoBehaviour
     private GrabableObject currentGrabableObject;
     public bool hasBeenThrown = false;
 
-
-   
     
     private void Awake()
     {
