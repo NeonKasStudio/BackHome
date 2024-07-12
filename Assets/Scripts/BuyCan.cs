@@ -8,8 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Transform spawnPoint;
     public GameObject canPrefab;
     public GameObject sign;
-    public Collider triggerVendingMachine;
-    public Collider triggerServingZone;
+ 
 
     private bool releasingCan = false;
     private bool isCanServed = false;
@@ -30,25 +29,33 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     }
+    private void Start()
+    {
+        Debug.Log("ESTO FUNCIONAAAAAAAAAA");
+    }
 
 
 
     private void OnTriggerStay (Collider other)
     {
 
-
-
+        Debug.Log("ENTRO AL TRIGGER");
         
 
         if (other.CompareTag("Player"))
         {
+            Debug.Log("SOY UN PLAYER");
+
             if (Input.GetKey(KeyCode.E) ) {
+                Debug.Log("PULSO E");
+
+                // si no hay una lata ya pedida
                 if (!releasingCan)
                 {
-                    if (GrabSystem.Instance.GetCurrentObjectType() == GrabableObject.ObjectType.Coin  )
-                    {
-                        Debug.Log("SOY una persona con un euro");
-                        Debug.Log("La lata esta servida: " + isCanServed);
+
+                    //if (GrabSystem.Instance.GetCurrentObjectType() == GrabableObject.ObjectType.Coin  )
+                    //{
+                    Debug.Log("SOY una persona con un euro");
 
                     
                         if (!InsertingCoinSound.isPlaying)
@@ -56,11 +63,11 @@ public class NewBehaviourScript : MonoBehaviour
 
                         GrabSystem.Instance.DeleteCurrentObject();
                         StartCoroutine(ReleaseCan());
-                    }
-                    else
-                    {
-                        StartCoroutine(ActivateSign());
-                    }
+                    //}
+                    //else if(GrabSystem.Instance.GetCurrentObjectType() == GrabableObject.ObjectType.Nothing)
+                    //{
+                    //    StartCoroutine(ActivateSign());
+                    //}
 
 
                 }
@@ -69,6 +76,10 @@ public class NewBehaviourScript : MonoBehaviour
             
                
 
+        }
+        else
+        {
+            Debug.Log("NO SOY UN PLAYER");
         }
        
        

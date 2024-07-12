@@ -25,7 +25,6 @@ public class GrabableObject : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 GrabSystem.Instance.PickUpObject(this);
-                
             }
 
         }

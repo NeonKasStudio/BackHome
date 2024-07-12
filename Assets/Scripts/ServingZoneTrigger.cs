@@ -10,11 +10,9 @@ public class ServingZoneTrigger : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("ESTO ESTA VIVO O QIE");
     }
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("HaY ALGO");
 
         if ( other.gameObject.name == "Can")
         {
