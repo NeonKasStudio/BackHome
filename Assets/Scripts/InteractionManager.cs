@@ -152,7 +152,6 @@ public class InteractionManager : MonoBehaviour
         // Si se ha encontrado un interactuable con la prioridad más alta, interactuar con él
         if (highestPriorityInteractable != null)
         {
-            Debug.Log("High Priority interactable. : " + highestPriorityInteractable.gameObject.name);
 
             highestPriorityInteractable.DisplayInteractionText();
             if (Input.GetKeyDown(KeyCode.E))

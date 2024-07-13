@@ -27,7 +27,7 @@ public class VendingMachine : BaseInteractable
 
             if (InteractionManager.Instance.GetCurrentGrabable() as Coin)
             {
-                Debug.Log("SOY una persona con un euro");
+                Debug.Log("Voy a destruir la monedita");
 
                 InteractionManager.Instance.DestroyCurrentGrabable();
 
@@ -48,12 +48,15 @@ public class VendingMachine : BaseInteractable
 
     private IEnumerator ReleaseCan()
     {
-        releasingCan = true;
+        InteractionManager.Instance.shouldInteract = false;
+        interactionText.text = string.Empty;
+       releasingCan = true;
         yield return new WaitForSeconds(5.0f);
-        Debug.Log("Suelto lata");
+        InteractionManager.Instance.shouldInteract = true;
+
         GameObject can = Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
         BaseGrabable g_can = can.GetComponent<BaseGrabable>();
-        g_can.interactionText = interactionText;
+        g_can.interactionText = InteractionManager.Instance.interactionText;
         releasingCan = false;
 
 

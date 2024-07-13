@@ -51,9 +51,18 @@ public class Can : BaseGrabable
         if (InteractionManager.Instance.objectHasBeenThrow)
         {
             PlayFallingSound();
-            Destroy(this);
+            StartCoroutine(CoolDownDestroyingCan());
             InteractionManager.Instance.objectHasBeenThrow = false;
         }
+    }
+
+    public IEnumerator CoolDownDestroyingCan ()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Debug.Log("LA MATE");
+
+        Destroy(this);
+
     }
 
     public void PlayFallingSound()
