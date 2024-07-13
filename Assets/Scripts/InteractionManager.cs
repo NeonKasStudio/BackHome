@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Interactio Manager coge objetos o interactua con ellos
+public enum InteractionPriority
+{
+    Low, // implicitamente 0
+    Medium, // implicitamente 1
+    High // implicitamente 2
+}
+
+// Interaction Manager coge objetos o interactua con ellos
 public class InteractionManager : MonoBehaviour
 {
     public static InteractionManager Instance;
     public Transform Hand;
-    private BaseGrabable currentGrabable = null;
+    private BaseGrabable currentGrabable;
+    public bool shouldInteract = true;
+
+
+    public bool objectHasBeenThrow;
+
+   
 
     private void Awake()
     {
+        objectHasBeenThrow = false;
+        currentGrabable = null;
         if (Instance == null)
         {
             Instance = this;
@@ -26,39 +41,29 @@ public class InteractionManager : MonoBehaviour
     {
         //DetectAndInteractWithObjects();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && shouldInteract)
         {
-            Debug.Log("PULSO LA K");
-            if (!currentGrabable) // no tiene objeto en las manos
+            //Debug.Log("PULSO LA K");
+            if (currentGrabable as Can) //Tengo una lata en las manos
             {
-                Debug.Log("No tengo ningun objeto en la smanos");
+                Debug.Log("Tegno uhna lata");
 
-                DetectAndInteractWithObjects();
+                Can can = currentGrabable as Can;
+                if (can.isEmpty)
+                {
+                    ThrowGrabbable();
+                }
+                else
+                {
+                    can.Drink();
+                }
+
 
             }
-            else // tiene ya un objeto en las manos
+            else // no tengo un objeto o tengo objetos que interactuan con otros ( moneda, llave ingl.) con lo que mando a detectar colisiones a ver si la maquina espendedora esta cerca
             {
-                switch (currentGrabable)
-                {
+                DetectAndInteractWithObjects();
 
-                    case Can can:
-                        if (can.isEmpty)
-                        {
-                            can.Throw();
-                        }
-                        else
-                        {
-                            can.Drink();
-                        }
-                        break;
-                    case Coin:
-                        DetectAndInteractWithObjects();
-                        break;
-
-
-
-
-                }
             }
         }
 
@@ -70,9 +75,12 @@ public class InteractionManager : MonoBehaviour
         currentGrabable = grabable;
     }
 
-    public void ClearCurrentGrabbable()
+    
+    public void DestroyCurrentGrabable()
     {
+        currentGrabable.DestroyObject();
         currentGrabable = null;
+        
     }
 
     public void Interact()
@@ -105,38 +113,46 @@ public class InteractionManager : MonoBehaviour
     {
         if (currentGrabable != null)
         {
+            objectHasBeenThrow = true;
             currentGrabable.Throw();
-            ClearCurrentGrabbable();
+            currentGrabable = null;
         }
     }
     public void DetectAndInteractWithObjects()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3.0f);
-        BaseGrabable highestPriorityInteractable = null;
+        BaseInteractable highestPriorityInteractable = null;
         InteractionPriority highestPriority = InteractionPriority.Low;
 
-        //Debug.Log(hitColliders.Length);
         foreach (var hitCollider in hitColliders)
         {
-            BaseGrabable interactable = hitCollider.GetComponent<BaseGrabable>();
+            BaseInteractable interactable = hitCollider.GetComponent<BaseInteractable>();
             if (interactable != null)
             {
-                if (interactable.GetPriority() > highestPriority)
+                // Debug log para ver la prioridad del interactuable actual
+
+
+                // Comparar la prioridad del interactuable actual con la prioridad más alta encontrada hasta ahora
+                if (interactable.GetPriority() >= highestPriority)
                 {
+                    // Debug log para ver cuando se encuentra una nueva prioridad más alta
+
+                    // Actualizar la prioridad más alta y el objeto interactuable de mayor prioridad
                     highestPriority = interactable.GetPriority();
                     highestPriorityInteractable = interactable;
                 }
             }
         }
 
+        // Si se ha encontrado un interactuable con la prioridad más alta, interactuar con él
         if (highestPriorityInteractable != null)
         {
             highestPriorityInteractable.DisplayInteractionText();
-           
-            //if(Input.GetKey(KeyCode.E))
-                highestPriorityInteractable.PerformAction();
-
-            
+            highestPriorityInteractable.PerformAction();
+        }
+        else
+        {
+            Debug.Log("No interactable objects found.");
         }
     }
 }

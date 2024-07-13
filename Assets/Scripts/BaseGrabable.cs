@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public abstract class BaseGrabable : BaseInteractable
 {
-    public AudioSource fallingSound;
 
     protected bool isGrabbed = false;
 
@@ -18,8 +18,13 @@ public abstract class BaseGrabable : BaseInteractable
         Destroy(this.gameObject);
     }
 
-    
 
+    public override void PerformAction()
+    {
+       
+        InteractionManager.Instance.PickUpGrabbable(this);
+
+    }
 
     public void PickUp(Transform playerHand)
     {
@@ -31,7 +36,6 @@ public abstract class BaseGrabable : BaseInteractable
 
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<GrabableObject>().enabled = false; ;
         //InteractionManager.Instance.PickUpGrabbable(this);
     }
 
@@ -48,10 +52,8 @@ public abstract class BaseGrabable : BaseInteractable
 
         // Aplicar una fuerza al objeto para lanzarlo
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
+       
 
-
-
-        
     }
 
     public override InteractionPriority GetPriority()
@@ -59,23 +61,8 @@ public abstract class BaseGrabable : BaseInteractable
         return InteractionPriority.High;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (GrabSystem.Instance.hasBeenThrown)
-        {
-            PlayFallingSound();
-            GrabSystem.Instance.hasBeenThrown = false;
-        }
-    }
+    
 
-    public void PlayFallingSound()
-    {
-        if (!fallingSound.isPlaying)
-        {
-            fallingSound.Play();
-
-        }
-    }
    
 
 

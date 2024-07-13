@@ -5,6 +5,9 @@ using UnityEngine;
 public class Can : BaseGrabable
 {
     public bool isEmpty = false;
+    public AudioSource drinkingCanSource;
+    public AudioSource fallingSound;
+
     // Start is called before the first frame update
     public override void DisplayInteractionText() {
         if (isEmpty)
@@ -18,22 +21,45 @@ public class Can : BaseGrabable
     }
 
     // Update is called once per frame
-    public override void PerformAction()
-    {
-        if(isEmpty)
-        {
-
-        }
-        Debug.Log("SOY UNA LATA Y HE LLEGADO MUY LEJOS");
-        InteractionManager.Instance.PickUpGrabbable(this);
-       
-    }
+   
+   
     public void Drink()
     {
         Debug.Log("You drank the can.");
         isEmpty = true;
-        InteractionManager.Instance.ClearCurrentGrabbable();
+        drinkingCanSource.Play();
+        StartCoroutine(DrinkingTime());
+
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (InteractionManager.Instance.objectHasBeenThrow)
+        {
+            PlayFallingSound();
+            Destroy(this);
+            InteractionManager.Instance.objectHasBeenThrow = false;
+        }
     }
 
-    
+    public void PlayFallingSound()
+    {
+        if (!fallingSound.isPlaying)
+        {
+            fallingSound.Play();
+
+        }
+    }
+
+    private IEnumerator DrinkingTime()
+    {
+        InteractionManager.Instance.shouldInteract = false;
+        yield return new WaitForSeconds(6.0f);
+        InteractionManager.Instance.shouldInteract = true;
+
+
+    }
+   
+
 }

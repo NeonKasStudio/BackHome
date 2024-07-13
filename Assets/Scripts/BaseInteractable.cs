@@ -11,10 +11,6 @@ public abstract class BaseInteractable : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
-        {
-
-        }
     }
     public virtual InteractionPriority GetPriority()
     {

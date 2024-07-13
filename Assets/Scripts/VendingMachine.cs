@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VendingMachine : BaseGrabable
+public class VendingMachine : BaseInteractable
 {
 
     public AudioSource InsertingCoinSound;
     public Transform spawnPoint;
     public GameObject canPrefab;
     public GameObject sign;
+
 
     private bool releasingCan = false;
     private float signCooldownTime = 3.0f;
@@ -28,7 +29,7 @@ public class VendingMachine : BaseGrabable
             {
                 Debug.Log("SOY una persona con un euro");
 
-                InteractionManager.Instance.GetCurrentGrabable().DestroyObject();
+                InteractionManager.Instance.DestroyCurrentGrabable();
 
                 if (!InsertingCoinSound.isPlaying)
                     InsertingCoinSound.Play();
