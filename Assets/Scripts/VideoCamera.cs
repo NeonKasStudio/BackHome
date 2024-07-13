@@ -19,7 +19,7 @@ public class VideoCamera : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(EnableCameraCoroutine());
+        //StartCoroutine(EnableCameraCoroutine());
     }
 
     private void Update()

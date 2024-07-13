@@ -24,19 +24,6 @@ public class FluorescentLight : MonoBehaviour
     public float startLightFailingTest = 10f;
     public float startLightBreakTest = 25f;
 
-    private void Start()
-    {
-        if(lightCanFail)
-            StartCoroutine(StartLightFailingTest());
-
-        if (lightCanBreak)
-            StartCoroutine(StartLightBreakTest());
-    }
-    IEnumerator StartLightFailingTest()
-    {
-        yield return new WaitForSeconds(startLightFailingTest);
-        EnableLightFailing();
-    }
 
     public void EnableLightFailing()
     {

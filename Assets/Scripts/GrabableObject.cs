@@ -36,6 +36,11 @@ public class GrabableObject : MonoBehaviour
         {
             PlayFallingSound();
             GrabSystem.Instance.hasBeenThrown = false;
+
+            if(objectType == ObjectType.Can)
+            {
+                StartCoroutine(PlayDramaticHitCoroutine());
+            }
         }
     }
 
@@ -46,5 +51,19 @@ public class GrabableObject : MonoBehaviour
             fallingSound.Play();
 
         }
+    }
+
+    IEnumerator PlayParanormalEventCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<ParanormalEventManager>().PlayParanormalEvent();
+
+    }
+
+    IEnumerator PlayDramaticHitCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().PlayDramaticHit();
+        StartCoroutine(PlayParanormalEventCoroutine());
     }
 }
