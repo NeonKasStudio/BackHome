@@ -29,22 +29,17 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     }
-    private void Start()
-    {
-        Debug.Log("ESTO FUNCIONAAAAAAAAAA");
-    }
-
-
+  
 
     private void OnTriggerStay (Collider other)
     {
 
-        Debug.Log("ENTRO AL TRIGGER");
+        //Debug.Log("ENTRO AL TRIGGER");
         
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("SOY UN PLAYER");
+            //Debug.Log("SOY UN PLAYER");
 
             if (Input.GetKey(KeyCode.E) ) {
                 Debug.Log("PULSO E");
@@ -79,7 +74,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("NO SOY UN PLAYER");
+            //Debug.Log("NO SOY UN PLAYER");
         }
        
        
