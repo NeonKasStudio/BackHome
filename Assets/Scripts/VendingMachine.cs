@@ -17,11 +17,11 @@ public class VendingMachine : BaseInteractable
 
     public override void DisplayInteractionText()
     {
+        interactionText.text = "Press E to Interact";
     }
 
     public override void PerformAction()
     {
-        Debug.Log("SOY UNA MAQUINA DE COCA COLA");
         if (!releasingCan)
         {
 
@@ -51,7 +51,9 @@ public class VendingMachine : BaseInteractable
         releasingCan = true;
         yield return new WaitForSeconds(5.0f);
         Debug.Log("Suelto lata");
-        Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject can = Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
+        BaseGrabable g_can = can.GetComponent<BaseGrabable>();
+        g_can.interactionText = interactionText;
         releasingCan = false;
 
 

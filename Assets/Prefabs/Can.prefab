@@ -407,9 +407,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acf0d61aba0b364ba56fab9ec99d225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallingSound: {fileID: 571938693859056164}
+  interactionText: {fileID: 4282216680383070959, guid: 70ae85d53ef5e344dae1c94681ddab3d,
+    type: 3}
   isEmpty: 0
   drinkingCanSource: {fileID: 4933268732488049019}
+  fallingSound: {fileID: 571938693859056164}
 --- !u!1 &9055898119226507079
 GameObject:
   m_ObjectHideFlags: 0

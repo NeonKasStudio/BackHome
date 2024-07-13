@@ -10,14 +10,27 @@ public class Can : BaseGrabable
 
     // Start is called before the first frame update
     public override void DisplayInteractionText() {
-        if (isEmpty)
+
+        if(InteractionManager.Instance.GetCurrentGrabable() == null)
         {
-            Debug.Log("Press 'E' to throw the can.");
+            interactionText.text = "Press 'E' to Grab the Can.";
+
         }
         else
         {
-            Debug.Log("Press 'E' to drink the can.");
+            if (isEmpty)
+            {
+                interactionText.text = "Press 'E' to throw the can.";
+                Debug.Log("Press 'E' to throw the can.");
+            }
+            else
+            {
+                interactionText.text = "Press 'E' to drink the can.";
+
+                Debug.Log("Press 'E' to drink the can.");
+            }
         }
+       
     }
 
     // Update is called once per frame

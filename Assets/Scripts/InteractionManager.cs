@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -17,7 +18,7 @@ public class InteractionManager : MonoBehaviour
     public Transform Hand;
     private BaseGrabable currentGrabable;
     public bool shouldInteract = true;
-
+    public TMP_Text interactionText;
 
     public bool objectHasBeenThrow;
 
@@ -41,22 +42,26 @@ public class InteractionManager : MonoBehaviour
     {
         //DetectAndInteractWithObjects();
 
-        if (Input.GetKeyDown(KeyCode.E) && shouldInteract)
+        if (shouldInteract)
         {
             //Debug.Log("PULSO LA K");
             if (currentGrabable as Can) //Tengo una lata en las manos
             {
-                Debug.Log("Tegno uhna lata");
+                DisplayInteractionText();
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    Can can = currentGrabable as Can;
+                    if (can.isEmpty)
+                    {
+                        ThrowGrabbable();
+                    }
+                    else
+                    {
+                        can.Drink();
+                    }
+                }
 
-                Can can = currentGrabable as Can;
-                if (can.isEmpty)
-                {
-                    ThrowGrabbable();
-                }
-                else
-                {
-                    can.Drink();
-                }
+                
 
 
             }
@@ -147,12 +152,15 @@ public class InteractionManager : MonoBehaviour
         // Si se ha encontrado un interactuable con la prioridad más alta, interactuar con él
         if (highestPriorityInteractable != null)
         {
+            Debug.Log("High Priority interactable. : " + highestPriorityInteractable.gameObject.name);
+
             highestPriorityInteractable.DisplayInteractionText();
-            highestPriorityInteractable.PerformAction();
+            if (Input.GetKeyDown(KeyCode.E))
+                highestPriorityInteractable.PerformAction();
         }
         else
         {
-            Debug.Log("No interactable objects found.");
+            interactionText.text = string.Empty;
         }
     }
 }

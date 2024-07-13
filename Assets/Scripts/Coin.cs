@@ -7,13 +7,13 @@ public class Coin : BaseGrabable
 {
     public override void DisplayInteractionText()
     {
+        interactionText.text = "Cogeme soy una monedita";
         Debug.Log("Cogeme soy una monedita");
     }
 
     // Update is called once per frame
     public override void PerformAction()
     {
-        Debug.Log("Monedita");
         InteractionManager.Instance.PickUpGrabbable(this);
     }
 }
