@@ -6,6 +6,7 @@ public class VendingMachine : BaseInteractable
 {
 
     public AudioSource InsertingCoinSound;
+    public AudioSource KickSound;
     public Transform spawnPoint;
     public GameObject canPrefab;
     public GameObject sign;
@@ -17,7 +18,7 @@ public class VendingMachine : BaseInteractable
 
     public override void DisplayInteractionText()
     {
-        interactionText.text = "E | Interact Vending Machine";
+        interactionText.text = "E | Interact";
     }
 
     public override void PerformAction()
@@ -34,7 +35,15 @@ public class VendingMachine : BaseInteractable
                     InsertingCoinSound.Play();
 
                 
-                    StartCoroutine(ReleaseCan());
+                    StartCoroutine(ReleaseCan(5f));
+            }
+            else if(InteractionManager.Instance.GetCurrentGrabable() as Wrench)
+            {
+                if (!KickSound.isPlaying)
+                    KickSound.Play();
+
+
+                StartCoroutine(ReleaseAndThrow(1.5f));
             }
             else
             {
@@ -45,12 +54,14 @@ public class VendingMachine : BaseInteractable
         }
     }
 
-    private IEnumerator ReleaseCan()
+    private IEnumerator ReleaseCan(float secondsWaiting)
     {
         InteractionManager.Instance.shouldInteract = false;
         interactionText.text = string.Empty;
-       releasingCan = true;
-        yield return new WaitForSeconds(5.0f);
+        releasingCan = true;
+
+        yield return new WaitForSeconds(secondsWaiting);
+
         InteractionManager.Instance.shouldInteract = true;
         GameObject can = Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
         BaseGrabable g_can = can.GetComponent<BaseGrabable>();
@@ -59,6 +70,31 @@ public class VendingMachine : BaseInteractable
 
 
     }
+    private IEnumerator ReleaseAndThrow(float secondsWaiting)
+    {
+        InteractionManager.Instance.shouldInteract = false;
+        interactionText.text = string.Empty;
+        releasingCan = true;
+    
+        yield return new WaitForSeconds(secondsWaiting);
+
+        GameObject can = Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
+        BaseGrabable g_can = can.GetComponent<BaseGrabable>();
+        g_can.Throw(5f);
+        g_can.interactionText = InteractionManager.Instance.interactionText;
+        StartCoroutine(TimeDesactivatingInteractions(1f));
+       
+        releasingCan = false;
+
+
+    }
+    private IEnumerator TimeDesactivatingInteractions(float secondsWaiting)
+    {
+        yield return new WaitForSeconds(secondsWaiting);
+        InteractionManager.Instance.shouldInteract = true;
+
+    }
+
     private IEnumerator ActivateSign()
     {
         // Activar el objeto

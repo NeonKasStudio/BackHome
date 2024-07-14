@@ -119,7 +119,7 @@ public class InteractionManager : MonoBehaviour
         if (currentGrabable != null)
         {
             objectHasBeenThrow = true;
-            currentGrabable.Throw();
+            currentGrabable.Throw(5f);
             currentGrabable = null;
         }
     }
@@ -147,6 +147,9 @@ public class InteractionManager : MonoBehaviour
                     highestPriorityInteractable = interactable;
                 }
             }
+        }
+        if(highestPriorityInteractable as Wrench) {
+            Debug.Log("TENEMOS UNA LLAVE INGLESA");
         }
 
         // Si se ha encontrado un interactuable con la prioridad más alta, interactuar con él

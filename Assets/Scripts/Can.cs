@@ -45,7 +45,7 @@ public class Can : BaseGrabable
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (InteractionManager.Instance.objectHasBeenThrow && collision.gameObject.tag=="Ground")
+        if ( collision.gameObject.tag=="Ground")
         {
             PlayFallingSound();
             StartCoroutine(PlayDramaticHitCoroutine());
@@ -58,8 +58,8 @@ public class Can : BaseGrabable
 
     public IEnumerator CoolDownDestroyingCan ()
     {
-        yield return new WaitForSeconds(4.0f);
-        Debug.Log("LA MATE");
+
+        yield return new WaitForSeconds(0.1f);
 
         Destroy(this);
 
