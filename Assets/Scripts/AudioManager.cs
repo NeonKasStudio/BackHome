@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip dramaticHit;
     public AudioClip horrorHit;
     public AudioClip TenseSound;
+    public AudioClip LightsOff;
+    public AudioClip latamanAppearence;
 
     private void Awake()
     {
@@ -27,5 +29,14 @@ public class AudioManager : MonoBehaviour
     public void PlayTenseSound()
     {
         audioSource.PlayOneShot(TenseSound);
+    }
+    public void PlayLightsOff()
+    {
+        audioSource.PlayOneShot(LightsOff);
+    }
+
+    public void LatamanAppearence()
+    {
+        audioSource.PlayOneShot(latamanAppearence);
     }
 }

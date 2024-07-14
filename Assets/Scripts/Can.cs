@@ -58,7 +58,7 @@ public class Can : BaseGrabable
 
     public IEnumerator CoolDownDestroyingCan ()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(4.0f);
         Debug.Log("LA MATE");
 
         Destroy(this);
@@ -76,6 +76,7 @@ public class Can : BaseGrabable
     IEnumerator PlayParanormalEventCoroutine()
     {
         yield return new WaitForSeconds(1f);
+        Debug.Log("pre paranormal");
         FindObjectOfType<ParanormalEventManager>().PlayParanormalEvent();
 
     }
@@ -84,6 +85,7 @@ public class Can : BaseGrabable
     {
         yield return new WaitForSeconds(1f);
         FindObjectOfType<AudioManager>().PlayDramaticHit();
+        Debug.Log("dramatic hit");
         StartCoroutine(PlayParanormalEventCoroutine());
     }
 

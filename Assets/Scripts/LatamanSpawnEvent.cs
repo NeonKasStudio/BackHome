@@ -8,6 +8,6 @@ public class LatamanSpawnEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        lataman.SetActive(true);
+        FindObjectOfType<ParanormalEventManager>().PlayLatamanAppareance();
     }
 }

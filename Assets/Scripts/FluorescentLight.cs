@@ -52,6 +52,9 @@ public class FluorescentLight : MonoBehaviour
 
         if (isLightFailing)
             StartCoroutine(SetLightEnabledCoroutine(!p_enabled, Random.Range(lightSwitchMinTime, lightSwitchMaxTime)));
+        else
+            ambienceLoop.Stop();
+
     }
 
     IEnumerator SetLightEnabledCoroutine(bool p_enabled, float waitTime)

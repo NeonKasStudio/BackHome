@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ParanormalEventManager : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class ParanormalEventManager : MonoBehaviour
     public List<EMLight> emergencyLights;
     public List<VideoCamera> videoCameras;
     public AudioSource kickSFX;
+    public GameObject emergencyLightVolume;
+    public AudioSource emergencyAlarm;
+    public AudioSource chaseMusic;
+    public GameObject lataman;
+    public GameObject latamanPointLight;
 
     public void PlayParanormalEvent()
     {
@@ -18,7 +24,6 @@ public class ParanormalEventManager : MonoBehaviour
         {
             case 0:
                 PlayLightFailing();
-                EnableEmergencyLights();
                 break;
 
             case 1:
@@ -60,6 +65,16 @@ public class ParanormalEventManager : MonoBehaviour
         kickSFX.Play();
     }
 
+    void PlayEmergencyAlarm()
+    {
+        emergencyAlarm.Play();
+        foreach (var l in emergencyLights)
+        {
+            l.EnableBlink();
+        }
+    }
+
+
     void EnableEmergencyLights()
     {
         foreach (var l in fluorescentLigths)
@@ -67,15 +82,50 @@ public class ParanormalEventManager : MonoBehaviour
             l.SetLightEnabled(false);
         }
 
+        FindObjectOfType<AudioManager>().PlayLightsOff();
         StartCoroutine(EnableEMLightsCoroutine());
+        emergencyLightVolume.gameObject.SetActive(true);
     }
 
     IEnumerator EnableEMLightsCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3.5f);
         foreach (var l in emergencyLights)
         {
-            l.EnableEMLight();
+            l.EnableEMLight(true);
         }
+    }
+
+    public void PlayLatamanAppareance()
+    {
+        FindObjectOfType<AudioManager>().LatamanAppearence();
+        lataman.SetActive(true);
+        latamanPointLight.gameObject.SetActive(true);
+        StartCoroutine(StopPointLightCoroutine());
+        StartCoroutine(EnableChaseMusicCoroutine());
+    }
+
+    IEnumerator StopPointLightCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        latamanPointLight.gameObject.SetActive(false);
+
+    }
+
+    IEnumerator EnableChaseMusicCoroutine()
+    {
+        yield return new WaitForSeconds(0.6f);
+        PlayEmergencyAlarm();
+        chaseMusic.Play();
+        lataman.GetComponentInChildren<Enemy>().StartChase();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+            EnableEmergencyLights();
+
+        if (Input.GetKeyDown(KeyCode.P))
+            PlayEmergencyAlarm();
     }
 }

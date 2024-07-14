@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.isStopped = true;
     }
 
     private void Update()
@@ -28,5 +29,12 @@ public class Enemy : MonoBehaviour
             currentVelocity += Time.deltaTime * interpolationSpeed;
             animator.SetFloat("speedMultiplier", currentVelocity);
         }
+    }
+
+    public void StartChase()
+    {
+        agent.enabled = true;
+        agent.isStopped = false;
+        animator.SetTrigger("chase");
     }
 }
