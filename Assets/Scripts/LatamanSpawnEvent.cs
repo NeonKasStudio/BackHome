@@ -8,6 +8,9 @@ public class LatamanSpawnEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        FindObjectOfType<ParanormalEventManager>().PlayLatamanAppareance();
+        if (other.CompareTag("Player"))
+        {
+            FindObjectOfType<ParanormalEventManager>().PlayLatamanAppareance();
+        }
     }
 }
