@@ -1,5 +1,90 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5647160518787688880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7269888128009053749}
+  - component: {fileID: 1828081914886288034}
+  - component: {fileID: 2278993524815163334}
+  m_Layer: 0
+  m_Name: can-neonkas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7269888128009053749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647160518787688880}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.9479936, z: 0, w: 0.3182894}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.567185, y: 0.567185, z: 0.567185}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9125827511972169683}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1828081914886288034
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647160518787688880}
+  m_Mesh: {fileID: -8367231247473855917, guid: 7a31f045b2dee414c877a67bd8ad7c79, type: 3}
+--- !u!23 &2278993524815163334
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647160518787688880}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3c370fbe36b124748a057e2883d8ab7b, type: 2}
+  - {fileID: 2100000, guid: 02291c5e59109c445bd988661a290d30, type: 2}
+  - {fileID: 2100000, guid: 9509316d8ed5e674e83a17e88ecb35b8, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5952455539477026831
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +375,7 @@ Transform:
   m_LocalScale: {x: 0.2994167, y: 0.2994167, z: 0.2994167}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7269888128009053749}
   - {fileID: 6604592581988169940}
   - {fileID: 6477961454691216751}
   - {fileID: 3123097788369597356}
@@ -310,7 +396,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8095244623280139838}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -364,10 +450,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.55278015
+  m_Height: 1.950445
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.00053350546, y: 0.024777148, z: -0.0000000995346}
 --- !u!54 &7309974969719980595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -407,8 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acf0d61aba0b364ba56fab9ec99d225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: {fileID: 4282216680383070959, guid: 70ae85d53ef5e344dae1c94681ddab3d,
-    type: 3}
+  interactionText: {fileID: 0}
   isEmpty: 0
   drinkingCanSource: {fileID: 4933268732488049019}
   fallingSound: {fileID: 571938693859056164}

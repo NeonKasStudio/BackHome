@@ -29,6 +29,7 @@ public abstract class BaseGrabable : BaseInteractable
     public void PickUp(Transform playerHand)
     {
         Debug.Log("Object picked up.");
+        this.transform.rotation= Quaternion.identity;
         // Mover el objeto a la mano del jugador
         transform.SetParent(playerHand);
         transform.localPosition = Vector3.zero;

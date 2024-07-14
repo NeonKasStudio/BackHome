@@ -52,7 +52,6 @@ public class VendingMachine : BaseInteractable
        releasingCan = true;
         yield return new WaitForSeconds(5.0f);
         InteractionManager.Instance.shouldInteract = true;
-
         GameObject can = Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
         BaseGrabable g_can = can.GetComponent<BaseGrabable>();
         g_can.interactionText = InteractionManager.Instance.interactionText;

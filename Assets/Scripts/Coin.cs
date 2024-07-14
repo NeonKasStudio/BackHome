@@ -13,6 +13,7 @@ public class Coin : BaseGrabable
     // Update is called once per frame
     public override void PerformAction()
     {
+        if(InteractionManager.Instance.GetCurrentGrabable()  == null)
         InteractionManager.Instance.PickUpGrabbable(this);
     }
 }

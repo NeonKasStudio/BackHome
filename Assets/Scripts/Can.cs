@@ -45,13 +45,16 @@ public class Can : BaseGrabable
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (InteractionManager.Instance.objectHasBeenThrow)
+        if (InteractionManager.Instance.objectHasBeenThrow && collision.gameObject.tag=="Ground")
         {
             PlayFallingSound();
+            StartCoroutine(PlayDramaticHitCoroutine());
             StartCoroutine(CoolDownDestroyingCan());
             InteractionManager.Instance.objectHasBeenThrow = false;
         }
     }
+
+
 
     public IEnumerator CoolDownDestroyingCan ()
     {
@@ -61,7 +64,6 @@ public class Can : BaseGrabable
         Destroy(this);
 
     }
-
     public void PlayFallingSound()
     {
         if (!fallingSound.isPlaying)
@@ -71,6 +73,21 @@ public class Can : BaseGrabable
         }
     }
 
+    IEnumerator PlayParanormalEventCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<ParanormalEventManager>().PlayParanormalEvent();
+
+    }
+
+    IEnumerator PlayDramaticHitCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().PlayDramaticHit();
+        StartCoroutine(PlayParanormalEventCoroutine());
+    }
+
+    
     private IEnumerator DrinkingTime()
     {
         InteractionManager.Instance.shouldInteract = false;
