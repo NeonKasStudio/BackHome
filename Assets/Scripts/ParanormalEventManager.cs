@@ -7,6 +7,8 @@ public class ParanormalEventManager : MonoBehaviour
     public int currentEvent = 0;
     public FluorescentLight lightToFail;
     public FluorescentLight lightToBreak;
+    public List<FluorescentLight> fluorescentLigths;
+    public List<EMLight> emergencyLights;
     public List<VideoCamera> videoCameras;
     public AudioSource kickSFX;
 
@@ -16,6 +18,7 @@ public class ParanormalEventManager : MonoBehaviour
         {
             case 0:
                 PlayLightFailing();
+                EnableEmergencyLights();
                 break;
 
             case 1:
@@ -55,5 +58,24 @@ public class ParanormalEventManager : MonoBehaviour
     void PlayKickSFX()
     {
         kickSFX.Play();
+    }
+
+    void EnableEmergencyLights()
+    {
+        foreach (var l in fluorescentLigths)
+        {
+            l.SetLightEnabled(false);
+        }
+
+        StartCoroutine(EnableEMLightsCoroutine());
+    }
+
+    IEnumerator EnableEMLightsCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        foreach (var l in emergencyLights)
+        {
+            l.EnableEMLight();
+        }
     }
 }

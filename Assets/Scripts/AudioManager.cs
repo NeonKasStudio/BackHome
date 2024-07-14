@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     AudioSource audioSource;
     public AudioClip dramaticHit;
+    public AudioClip horrorHit;
+    public AudioClip TenseSound;
 
     private void Awake()
     {
@@ -15,5 +17,15 @@ public class AudioManager : MonoBehaviour
     public void PlayDramaticHit()
     {
         audioSource.PlayOneShot(dramaticHit);
+    }
+
+    public void PlayHorrorHit()
+    {
+        audioSource.PlayOneShot(horrorHit);
+    }
+
+    public void PlayTenseSound()
+    {
+        audioSource.PlayOneShot(TenseSound);
     }
 }
