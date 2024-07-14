@@ -7,6 +7,7 @@ public class Can : BaseGrabable
     public bool isEmpty = false;
     public AudioSource drinkingCanSource;
     public AudioSource fallingSound;
+    bool isEnabled = true;
 
     // Start is called before the first frame update
     public override void DisplayInteractionText() {
@@ -44,9 +45,12 @@ public class Can : BaseGrabable
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isEnabled)
+            return;
 
         if ( collision.gameObject.tag=="Ground")
         {
+            isEnabled = false;
             PlayFallingSound();
             StartCoroutine(PlayDramaticHitCoroutine());
             StartCoroutine(CoolDownDestroyingCan());
@@ -59,7 +63,7 @@ public class Can : BaseGrabable
     public IEnumerator CoolDownDestroyingCan ()
     {
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(4f);
 
         Destroy(this);
 

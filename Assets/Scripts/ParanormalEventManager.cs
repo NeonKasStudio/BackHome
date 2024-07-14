@@ -63,6 +63,14 @@ public class ParanormalEventManager : MonoBehaviour
     void PlayKickSFX()
     {
         kickSFX.Play();
+        StartCoroutine(DropCanInDisabledMachineCoroutine());
+    }
+
+    IEnumerator DropCanInDisabledMachineCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //Logica para spawnear lata en maquina desactivada
     }
 
     void PlayEmergencyAlarm()

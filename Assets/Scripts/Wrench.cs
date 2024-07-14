@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Wrench : BaseGrabable
 {
+    public GameObject latamanTrigger;
 
     public void Start()
     {
@@ -18,5 +19,12 @@ public class Wrench : BaseGrabable
 
        
 
+    }
+
+    public override void PerformAction()
+    {
+
+        base.PerformAction();
+        latamanTrigger.SetActive(true);
     }
 }
