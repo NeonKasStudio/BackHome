@@ -40,7 +40,7 @@ public abstract class BaseGrabable : BaseInteractable
         //InteractionManager.Instance.PickUpGrabbable(this);
     }
 
-    public void Throw()
+    public void Throw(float force)
     {
         Debug.Log("Object thrown.");
         // Desvincular el objeto de la mano del jugador
@@ -52,7 +52,7 @@ public abstract class BaseGrabable : BaseInteractable
         GetComponent<Collider>().enabled = true;
 
         // Aplicar una fuerza al objeto para lanzarlo
-        rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
+        rb.AddForce(transform.forward * force, ForceMode.Impulse);
        
 
     }
