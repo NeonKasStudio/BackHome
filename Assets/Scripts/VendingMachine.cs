@@ -17,7 +17,7 @@ public class VendingMachine : BaseInteractable
 
     public override void DisplayInteractionText()
     {
-        interactionText.text = "Press E to Interact";
+        interactionText.text = "E | Interact Vending Machine";
     }
 
     public override void PerformAction()
@@ -27,7 +27,6 @@ public class VendingMachine : BaseInteractable
 
             if (InteractionManager.Instance.GetCurrentGrabable() as Coin)
             {
-                Debug.Log("Voy a destruir la monedita");
 
                 InteractionManager.Instance.DestroyCurrentGrabable();
 

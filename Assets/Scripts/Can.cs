@@ -13,21 +13,19 @@ public class Can : BaseGrabable
 
         if(InteractionManager.Instance.GetCurrentGrabable() == null)
         {
-            interactionText.text = "Press 'E' to Grab the Can.";
+            interactionText.text = "E | Grab Can.";
 
         }
         else
         {
             if (isEmpty)
             {
-                interactionText.text = "Press 'E' to throw the can.";
-                Debug.Log("Press 'E' to throw the can.");
+                interactionText.text = "E | Throw.";
             }
             else
             {
-                interactionText.text = "Press 'E' to drink the can.";
+                interactionText.text = "E | Drink.";
 
-                Debug.Log("Press 'E' to drink the can.");
             }
         }
        
@@ -38,7 +36,6 @@ public class Can : BaseGrabable
    
     public void Drink()
     {
-        Debug.Log("You drank the can.");
         isEmpty = true;
         drinkingCanSource.Play();
         StartCoroutine(DrinkingTime());

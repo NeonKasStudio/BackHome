@@ -7,8 +7,7 @@ public class Coin : BaseGrabable
 {
     public override void DisplayInteractionText()
     {
-        interactionText.text = "Cogeme soy una monedita";
-        Debug.Log("Cogeme soy una monedita");
+        interactionText.text = "E | Grab Coin";
     }
 
     // Update is called once per frame
