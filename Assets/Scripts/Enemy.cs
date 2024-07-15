@@ -75,5 +75,6 @@ public class Enemy : MonoBehaviour
         Destroy(emergencySound);
         Destroy(chaseSound);
         Destroy(animator);
+        Application.Quit();
     }
 }

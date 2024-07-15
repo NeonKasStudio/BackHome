@@ -30,6 +30,10 @@ public class ParanormalEventManager : MonoBehaviour
     public AudioSource mant_door_audio;
     public AudioSource elec_door_audio;
 
+    public MeshRenderer screen1;
+    public MeshRenderer screen2;
+    public Material blackMaterial;
+
     public void PlayParanormalEvent()
     {
         switch (currentEvent)
@@ -109,6 +113,14 @@ public class ParanormalEventManager : MonoBehaviour
             l.SetLightEnabled(false);
         }
 
+        var mats = screen1.materials;
+        mats[1] = blackMaterial;
+        screen1.materials = mats;
+
+        var mats2 = screen2.materials;
+        mats2[1] = blackMaterial;
+        screen2.materials = mats2;
+
         FindObjectOfType<AudioManager>().PlayLightsOff();
         StartCoroutine(EnableEMLightsCoroutine());
         emergencyLightVolume.gameObject.SetActive(true);
@@ -155,16 +167,6 @@ public class ParanormalEventManager : MonoBehaviour
         lataman.GetComponentInChildren<Enemy>().StartChase();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-            EnableEmergencyLights();
-
-        if (Input.GetKeyDown(KeyCode.P))
-            PlayEmergencyAlarm();
-    }
-
-
 
     IEnumerator ShowTextoPerturbadorAseoCoroutine()
     {
@@ -173,7 +175,7 @@ public class ParanormalEventManager : MonoBehaviour
         //Logica texto perturbador
         StartCoroutine(OpenDoorWCCoroutine());
         InteractionManager.Instance.shouldInteract = false;
-        interactionText.text = "I'm pissing myself\nWhere's the toilet in this fucking station?";
+        interactionText.text = "I think I need to go to the toilet";
 
         StartCoroutine(TimeShowingTestCoroutine());
     }
@@ -183,7 +185,7 @@ public class ParanormalEventManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         InteractionManager.Instance.shouldInteract = false;
 
-        interactionText.text = "Now the fucking machine is broken.\nI think I've seen a tool room around here.";
+        interactionText.text = "It seems that the machine is broken";
 
         StartCoroutine(TimeShowingTestCoroutine());
 
@@ -196,11 +198,12 @@ public class ParanormalEventManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         StartCoroutine(OpenDoorElecCoroutine());
-        InteractionManager.Instance.shouldInteract = false;
+
+        /*InteractionManager.Instance.shouldInteract = false;
 
         interactionText.text = "Fucking Hell, I want to get out of this place.\nLet's see if I can turn on the lights and get the fuck out of here.";
 
-        StartCoroutine(TimeShowingTestCoroutine());
+        StartCoroutine(TimeShowingTestCoroutine());*/
 
     }
 
