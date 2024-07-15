@@ -131,7 +131,18 @@ public class InteractionManager : MonoBehaviour
 
         foreach (var hitCollider in hitColliders)
         {
-            BaseInteractable interactable = hitCollider.GetComponent<BaseInteractable>();
+            BaseInteractable interactable;
+
+            if(currentGrabable as Coin || currentGrabable as Wrench)
+            {
+                 interactable = hitCollider.GetComponent<VendingMachine>();
+
+            }
+            else
+            {
+                interactable = hitCollider.GetComponent<BaseInteractable>();
+
+            }
             if (interactable != null)
             {
                 // Debug log para ver la prioridad del interactuable actual
