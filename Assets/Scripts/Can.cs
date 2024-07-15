@@ -10,23 +10,27 @@ public class Can : BaseGrabable
     bool isEnabled = true;
 
     // Start is called before the first frame update
+   
     public override void DisplayInteractionText() {
 
-        if(InteractionManager.Instance.GetCurrentGrabable() == null)
+        if (isEnabled)
         {
-            interactionText.text = "E | Grab Can.";
-
-        }
-        else
-        {
-            if (isEmpty)
+            if (InteractionManager.Instance.GetCurrentGrabable() == null)
             {
-                interactionText.text = "E | Throw.";
+                interactionText.text = "E | Grab Can.";
+
             }
             else
             {
-                interactionText.text = "E | Drink.";
+                if (isEmpty)
+                {
+                    interactionText.text = "E | Throw.";
+                }
+                else
+                {
+                    interactionText.text = "E | Drink.";
 
+                }
             }
         }
        
@@ -53,8 +57,10 @@ public class Can : BaseGrabable
             isEnabled = false;
             PlayFallingSound();
             StartCoroutine(PlayDramaticHitCoroutine());
-            StartCoroutine(CoolDownDestroyingCan());
-            InteractionManager.Instance.objectHasBeenThrow = false;
+            
+
+            // StartCoroutine(CoolDownDestroyingCan());
+
         }
     }
 
@@ -64,6 +70,8 @@ public class Can : BaseGrabable
     {
 
         yield return new WaitForSeconds(4f);
+        InteractionManager.Instance.shouldInteract = true;
+        InteractionManager.Instance.objectHasBeenThrow = false;
 
         Destroy(this);
 
@@ -82,6 +90,10 @@ public class Can : BaseGrabable
         yield return new WaitForSeconds(1f);
         Debug.Log("pre paranormal");
         FindObjectOfType<ParanormalEventManager>().PlayParanormalEvent();
+        InteractionManager.Instance.shouldInteract = true;
+        InteractionManager.Instance.objectHasBeenThrow = false;
+
+        Destroy(this);
 
     }
 
@@ -91,11 +103,14 @@ public class Can : BaseGrabable
         FindObjectOfType<AudioManager>().PlayDramaticHit();
         Debug.Log("dramatic hit");
         StartCoroutine(PlayParanormalEventCoroutine());
+
     }
 
     
     private IEnumerator DrinkingTime()
     {
+        InteractionManager.Instance.interactionText.text = string.Empty;
+
         InteractionManager.Instance.shouldInteract = false;
         yield return new WaitForSeconds(6.0f);
         InteractionManager.Instance.shouldInteract = true;

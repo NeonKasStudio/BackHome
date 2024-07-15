@@ -33,13 +33,13 @@ public class VendingMachine : BaseInteractable
     int maxNumberOfThrowingCansBeforeMachineBroken = 5;
     int maxNumberOfThrowingCansAfterMachineBroken = 12;
     int currentThrowedCans;
-    bool isMachineBroken = false;
+    public bool isMachineBroken = false;
 
     public Animator anim;
 
     public override void DisplayInteractionText()
     {
-
+        if(!isMachineBroken)
         interactionText.text = "E | Interact";
     }
 
@@ -48,7 +48,7 @@ public class VendingMachine : BaseInteractable
         if (isMachineBroken)
             return;
 
-        if (!releasingCan)
+        if (!releasingCan )
         {
 
             if (InteractionManager.Instance.GetCurrentGrabable() as Coin)

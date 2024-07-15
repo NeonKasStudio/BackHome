@@ -53,7 +53,9 @@ public abstract class BaseGrabable : BaseInteractable
 
         // Aplicar una fuerza al objeto para lanzarlo
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
-       
+        InteractionManager.Instance.shouldInteract = false;
+
+
 
     }
 

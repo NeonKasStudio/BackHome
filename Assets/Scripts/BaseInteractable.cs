@@ -7,7 +7,6 @@ public abstract class BaseInteractable : MonoBehaviour
 {
     public TMP_Text interactionText;
     public abstract void DisplayInteractionText();
-   
 
     public abstract void PerformAction();
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -19,6 +20,7 @@ public class ParanormalEventManager : MonoBehaviour
     public GameObject latamanPointLight;
     public VendingMachine disabledVendingMachine;
     public VendingMachine enabledVendingMachine;
+    public TMP_Text interactionText;
 
     public Animator wc_door;
     public Animator mant_door;
@@ -170,11 +172,21 @@ public class ParanormalEventManager : MonoBehaviour
 
         //Logica texto perturbador
         StartCoroutine(OpenDoorWCCoroutine());
+        InteractionManager.Instance.shouldInteract = false;
+        interactionText.text = "I'm pissing myself\nWhere's the toilet in this fucking station?";
+
+        StartCoroutine(TimeShowingTestCoroutine());
     }
 
     IEnumerator ShowTextoPerturbadorMantenimientoCoroutine()
     {
         yield return new WaitForSeconds(2f);
+        InteractionManager.Instance.shouldInteract = false;
+
+        interactionText.text = "Now the fucking machine is broken.\nI think I've seen a tool room around here.";
+
+        StartCoroutine(TimeShowingTestCoroutine());
+
 
         //Logica texto perturbador
         StartCoroutine(OpenDoorMantCoroutine());
@@ -183,8 +195,13 @@ public class ParanormalEventManager : MonoBehaviour
     IEnumerator ShowTextoPerturbadorElectricidadCoroutine()
     {
         yield return new WaitForSeconds(4f);
-        //Logica texto perturbador
         StartCoroutine(OpenDoorElecCoroutine());
+        InteractionManager.Instance.shouldInteract = false;
+
+        interactionText.text = "Fucking Hell, I want to get out of this place.\nLet's see if I can turn on the lights and get the fuck out of here.";
+
+        StartCoroutine(TimeShowingTestCoroutine());
+
     }
 
     IEnumerator OpenDoorWCCoroutine()
@@ -215,5 +232,14 @@ public class ParanormalEventManager : MonoBehaviour
         {
             l.SetLightEnabled(true);
         }
+      
+
+    }
+
+    IEnumerator TimeShowingTestCoroutine()
+    {
+        yield return new WaitForSeconds(4f);
+        InteractionManager.Instance.shouldInteract = true;
+
     }
 }
