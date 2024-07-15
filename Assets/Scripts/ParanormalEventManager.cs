@@ -17,6 +17,8 @@ public class ParanormalEventManager : MonoBehaviour
     public AudioSource chaseMusic;
     public GameObject lataman;
     public GameObject latamanPointLight;
+    public VendingMachine disabledVendingMachine;
+    public VendingMachine enabledVendingMachine;
 
     public void PlayParanormalEvent()
     {
@@ -36,6 +38,10 @@ public class ParanormalEventManager : MonoBehaviour
 
             case 3:
                 PlayKickSFX();
+                break;
+
+            case 4:
+                PlayVendingMachinePowerOff();
                 break;
         }
 
@@ -58,6 +64,8 @@ public class ParanormalEventManager : MonoBehaviour
         {
             cam.EnableCamera();
         }
+
+        StartCoroutine(ShowTextoPerturbadorAseoCoroutine());
     }
 
     void PlayKickSFX()
@@ -68,9 +76,10 @@ public class ParanormalEventManager : MonoBehaviour
 
     IEnumerator DropCanInDisabledMachineCoroutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0f);
 
         //Logica para spawnear lata en maquina desactivada
+        disabledVendingMachine.ReleaseCanWithoutCoin();
     }
 
     void PlayEmergencyAlarm()
@@ -83,7 +92,7 @@ public class ParanormalEventManager : MonoBehaviour
     }
 
 
-    void EnableEmergencyLights()
+    public void EnableEmergencyLights()
     {
         foreach (var l in fluorescentLigths)
         {
@@ -93,6 +102,8 @@ public class ParanormalEventManager : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayLightsOff();
         StartCoroutine(EnableEMLightsCoroutine());
         emergencyLightVolume.gameObject.SetActive(true);
+
+        StartCoroutine(ShowTextoPerturbadorElectricidadCoroutine());
     }
 
     IEnumerator EnableEMLightsCoroutine()
@@ -111,6 +122,12 @@ public class ParanormalEventManager : MonoBehaviour
         latamanPointLight.gameObject.SetActive(true);
         StartCoroutine(StopPointLightCoroutine());
         StartCoroutine(EnableChaseMusicCoroutine());
+    }
+
+    public void PlayVendingMachinePowerOff()
+    {
+        enabledVendingMachine.DisableVendingMachine();
+        StartCoroutine(ShowTextoPerturbadorMantenimientoCoroutine());
     }
 
     IEnumerator StopPointLightCoroutine()
@@ -135,5 +152,27 @@ public class ParanormalEventManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
             PlayEmergencyAlarm();
+    }
+
+
+
+    IEnumerator ShowTextoPerturbadorAseoCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //Logica texto perturbador
+    }
+
+    IEnumerator ShowTextoPerturbadorMantenimientoCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //Logica texto perturbador
+    }
+
+    IEnumerator ShowTextoPerturbadorElectricidadCoroutine()
+    {
+        yield return new WaitForSeconds(4f);
+        //Logica texto perturbador
     }
 }
