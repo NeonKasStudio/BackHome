@@ -35,6 +35,9 @@ public class VendingMachine : BaseInteractable
     int currentThrowedCans;
     public bool isMachineBroken = false;
 
+    public AudioSource spawnCoinSound;
+
+
     public Animator anim;
 
     public override void DisplayInteractionText()
