@@ -14,9 +14,15 @@ public class VendingMachine : BaseInteractable
     //Disable vending machine
     public MeshRenderer vendMesh;
     public MeshRenderer neonKasMesh;
+
     public Material mat1NonEmmissive;
     public Material mat2NonEmmissive;
     public Material mat3NonEmmissive;
+
+    public Material mat1Emmissive;
+    public Material mat2Emmissive;
+    public Material mat3Emmissive;
+
     public AudioSource powerOff;
 
     private bool releasingCan = false;
@@ -28,6 +34,8 @@ public class VendingMachine : BaseInteractable
     int maxNumberOfThrowingCansAfterMachineBroken = 12;
     int currentThrowedCans;
     bool isMachineBroken = false;
+
+    public Animator anim;
 
     public override void DisplayInteractionText()
     {
@@ -59,6 +67,7 @@ public class VendingMachine : BaseInteractable
                 if (!KickSound.isPlaying)
                     KickSound.Play();
 
+                anim.SetTrigger("hit");
 
                 StartCoroutine(ReleaseAndThrow(1.5f));
             }
@@ -121,7 +130,7 @@ public class VendingMachine : BaseInteractable
                 StartCoroutine(ReleaseAndThrow(0.5f));
             else
             {
-                DisableVendingMachine();
+                DisableVendingMachine(true, true);
                 StartCoroutine(EnableEmergencyLightsCoroutine());
             }
         }
@@ -137,6 +146,7 @@ public class VendingMachine : BaseInteractable
     public void BreakVendingMachine()
     {
         isMachineBroken = true;
+        DisableVendingMachine(false, false);
         StartCoroutine(ReleaseAndThrow(0.2f));
     }
 
@@ -159,28 +169,26 @@ public class VendingMachine : BaseInteractable
         sign.SetActive(false);
     }
 
-    public void DisableVendingMachine()
+    public void DisableVendingMachine(bool playFX, bool p_disable)
     {
-        if (disabledMachine)
-            return;
-
         disabledMachine = true;
 
         var mats = vendMesh.materials;
-        mats[1] = mat1NonEmmissive;
-        mats[5] = mat2NonEmmissive;
+        mats[1] = p_disable ? mat1NonEmmissive : mat1Emmissive;
+        mats[5] = p_disable ? mat2NonEmmissive : mat2Emmissive;
         vendMesh.materials = mats;
 
         var mats2 = neonKasMesh.materials;
-        mats2[0] = mat3NonEmmissive;
+        mats2[0] = p_disable ? mat3NonEmmissive : mat3Emmissive;
         neonKasMesh.materials = mats2;
 
-        powerOff.Play();
+        if(playFX)
+            powerOff.Play();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.U))
-            DisableVendingMachine();
+            DisableVendingMachine(true, true);
     }
 }

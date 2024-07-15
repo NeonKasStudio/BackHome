@@ -5,6 +5,7 @@ using UnityEngine;
 public class FootSteps : MonoBehaviour
 {
     public GameObject footstep;
+    public PlayerMovement player;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,9 @@ public class FootSteps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player.enabled)
+            return;
+
         if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             footsteps();

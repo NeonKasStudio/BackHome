@@ -14,7 +14,7 @@ public class PlayAudioWithDelay : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(PlaySoundCoroutine());
+        //StartCoroutine(PlaySoundCoroutine());
     }
 
     IEnumerator PlaySoundCoroutine()

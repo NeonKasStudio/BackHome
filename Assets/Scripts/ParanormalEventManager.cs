@@ -20,6 +20,14 @@ public class ParanormalEventManager : MonoBehaviour
     public VendingMachine disabledVendingMachine;
     public VendingMachine enabledVendingMachine;
 
+    public Animator wc_door;
+    public Animator mant_door;
+    public Animator elec_door;
+
+    public AudioSource wc_door_audio;
+    public AudioSource mant_door_audio;
+    public AudioSource elec_door_audio;
+
     public void PlayParanormalEvent()
     {
         switch (currentEvent)
@@ -126,7 +134,7 @@ public class ParanormalEventManager : MonoBehaviour
 
     public void PlayVendingMachinePowerOff()
     {
-        enabledVendingMachine.DisableVendingMachine();
+        enabledVendingMachine.DisableVendingMachine(true, true);
         StartCoroutine(ShowTextoPerturbadorMantenimientoCoroutine());
     }
 
@@ -161,6 +169,7 @@ public class ParanormalEventManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //Logica texto perturbador
+        StartCoroutine(OpenDoorWCCoroutine());
     }
 
     IEnumerator ShowTextoPerturbadorMantenimientoCoroutine()
@@ -168,11 +177,43 @@ public class ParanormalEventManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //Logica texto perturbador
+        StartCoroutine(OpenDoorMantCoroutine());
     }
 
     IEnumerator ShowTextoPerturbadorElectricidadCoroutine()
     {
         yield return new WaitForSeconds(4f);
         //Logica texto perturbador
+        StartCoroutine(OpenDoorElecCoroutine());
+    }
+
+    IEnumerator OpenDoorWCCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        wc_door.enabled = true;
+        wc_door_audio.Play();
+
+    }
+
+    IEnumerator OpenDoorMantCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        mant_door.enabled = true;
+        mant_door_audio.Play();
+    }
+
+    IEnumerator OpenDoorElecCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        elec_door.enabled = true;
+        elec_door_audio.Play();
+    }
+
+    public void EnableAllLights()
+    {
+        foreach (var l in fluorescentLigths)
+        {
+            l.SetLightEnabled(true);
+        }
     }
 }
