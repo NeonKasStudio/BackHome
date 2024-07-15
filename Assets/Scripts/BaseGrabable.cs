@@ -8,6 +8,7 @@ public abstract class BaseGrabable : BaseInteractable
 {
 
     protected bool isGrabbed = false;
+    public bool performsAction = true;
 
     public override void DisplayInteractionText()
     {
@@ -21,8 +22,8 @@ public abstract class BaseGrabable : BaseInteractable
 
     public override void PerformAction()
     {
-       
-        InteractionManager.Instance.PickUpGrabbable(this);
+        if(performsAction)
+            InteractionManager.Instance.PickUpGrabbable(this);
 
     }
 

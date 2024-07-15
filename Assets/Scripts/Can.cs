@@ -22,6 +22,7 @@ public class Can : BaseGrabable
             }
             else
             {
+
                 if (isEmpty)
                 {
                     interactionText.text = "E | Throw.";

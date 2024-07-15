@@ -117,6 +117,7 @@ public class VendingMachine : BaseInteractable
 
         GameObject can = Instantiate(canPrefab, spawnPoint.position, spawnPoint.rotation);
         BaseGrabable g_can = can.GetComponent<BaseGrabable>();
+        g_can.performsAction = false;
         g_can.Throw(5f);
         g_can.interactionText = InteractionManager.Instance.interactionText;
         StartCoroutine(TimeDesactivatingInteractions(1f));

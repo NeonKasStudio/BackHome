@@ -954,6 +954,8 @@ MonoBehaviour:
   mat3Emmissive: {fileID: 2100000, guid: b30bd2a75dad8c64596daf29db638d8e, type: 2}
   powerOff: {fileID: 4699793659490021884}
   disabledMachine: 0
+  isMachineBroken: 0
+  spawnCoinSound: {fileID: 0}
   anim: {fileID: 8119081379678394346}
 --- !u!65 &911453235747760282
 BoxCollider:

@@ -12,6 +12,7 @@ public class Toilet : BaseInteractable
     public GameObject Coin;
     public AudioSource spawnCoinSound;
     public bool isTheFirstTime = true;
+    public GameObject coinToSpawn;
 
     // Start is called before the first frame update
     public override void DisplayInteractionText()
@@ -32,13 +33,9 @@ public class Toilet : BaseInteractable
         {
             if (!spawnCoinSound.isPlaying)
                 spawnCoinSound.Play();
-            GameObject coin = Instantiate(Coin, spawnPoint.position, spawnPoint.rotation);
-            BaseGrabable g_coin = coin.GetComponent<Coin>();
-            g_coin.interactionText = InteractionManager.Instance.interactionText;
-            isTheFirstTime = false;
-        }
-       
 
+            coinToSpawn.gameObject.SetActive(true);
+        }
     }
 }
 
