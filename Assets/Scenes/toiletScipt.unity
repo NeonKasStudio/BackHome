@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.056713536, g: 0.05723931, b: 0.052235074, a: 1}
+  m_IndirectSpecularColor: {r: 0.06224484, g: 0.06814865, b: 0.075399704, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9238,7 +9238,7 @@ PrefabInstance:
         type: 3}
       propertyPath: groundCheck
       value: 
-      objectReference: {fileID: 1993406566}
+      objectReference: {fileID: 1408994114}
     - target: {fileID: 6867187132707549434, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
         type: 3}
       propertyPath: groundMask.m_Bits
@@ -10020,6 +10020,9 @@ MonoBehaviour:
   wc_door_audio: {fileID: 1195952873}
   mant_door_audio: {fileID: 68542586}
   elec_door_audio: {fileID: 1875140842}
+  screen1: {fileID: 0}
+  screen2: {fileID: 0}
+  blackMaterial: {fileID: 0}
 --- !u!4 &963217257
 Transform:
   m_ObjectHideFlags: 0
@@ -16086,6 +16089,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1408994114 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2420018238516054357, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
+    type: 3}
+  m_PrefabInstance: {fileID: 880216518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1409491263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22036,12 +22045,6 @@ Transform:
   - {fileID: 654473993}
   m_Father: {fileID: 1386204389}
   m_LocalEulerAnglesHint: {x: 31.056332, y: 11.792495, z: -50.914062}
---- !u!4 &1993406566 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2420018238516054357, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
-    type: 3}
-  m_PrefabInstance: {fileID: 880216518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1996013432
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24653,6 +24656,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 687334671}
   Coin: {fileID: 7857546318314196363, guid: d95d7fe51c5cb134d8150c84a750996b, type: 3}
   spawnCoinSound: {fileID: 663656110}
+  isTheFirstTime: 1
 --- !u!54 &3070833872451523573
 Rigidbody:
   m_ObjectHideFlags: 0
