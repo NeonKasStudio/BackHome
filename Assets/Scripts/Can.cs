@@ -10,23 +10,27 @@ public class Can : BaseGrabable
     bool isEnabled = true;
 
     // Start is called before the first frame update
+   
     public override void DisplayInteractionText() {
 
-        if(InteractionManager.Instance.GetCurrentGrabable() == null)
+        if (isEnabled)
         {
-            interactionText.text = "E | Grab Can.";
-
-        }
-        else
-        {
-            if (isEmpty)
+            if (InteractionManager.Instance.GetCurrentGrabable() == null)
             {
-                interactionText.text = "E | Throw.";
+                interactionText.text = "E | Grab Can.";
+
             }
             else
             {
-                interactionText.text = "E | Drink.";
+                if (isEmpty)
+                {
+                    interactionText.text = "E | Throw.";
+                }
+                else
+                {
+                    interactionText.text = "E | Drink.";
 
+                }
             }
         }
        
@@ -51,9 +55,11 @@ public class Can : BaseGrabable
         if ( collision.gameObject.tag=="Ground")
         {
             isEnabled = false;
+            InteractionManager.Instance.shouldInteract = false;
             PlayFallingSound();
             StartCoroutine(PlayDramaticHitCoroutine());
             StartCoroutine(CoolDownDestroyingCan());
+            InteractionManager.Instance.shouldInteract = true;
             InteractionManager.Instance.objectHasBeenThrow = false;
         }
     }

@@ -31,16 +31,17 @@ public class VendingMachine : BaseInteractable
 
     public override void DisplayInteractionText()
     {
-
+        if(!disabledMachine)
         interactionText.text = "E | Interact";
     }
 
     public override void PerformAction()
     {
+        Debug.Log(isMachineBroken);
         if (isMachineBroken)
             return;
 
-        if (!releasingCan)
+        if (!releasingCan )
         {
 
             if (InteractionManager.Instance.GetCurrentGrabable() as Coin)

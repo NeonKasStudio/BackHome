@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.062224247, g: 0.068122275, b: 0.07536531, a: 1}
+  m_IndirectSpecularColor: {r: 0.056713536, g: 0.057239145, b: 0.05223567, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -646,6 +646,37 @@ Transform:
   - {fileID: 1060876889}
   m_Father: {fileID: 2084738543}
   m_LocalEulerAnglesHint: {x: -86.82211, y: -142.06296, z: 138.23807}
+--- !u!1 &56954770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56954771}
+  m_Layer: 0
+  m_Name: Hand (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56954771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56954770}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7999996, y: -0.5328537, z: 1.44}
+  m_LocalScale: {x: 1, y: 1.7881, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1732937556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &62276824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8605,6 +8636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053206486039149159, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
         type: 3}
+      propertyPath: Hand
+      value: 
+      objectReference: {fileID: 56954771}
+    - target: {fileID: 6053206486039149159, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
+        type: 3}
       propertyPath: interactionText
       value: 
       objectReference: {fileID: 40717271}
@@ -8630,6 +8666,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1993406566}
+    - targetCorrespondingSourceObject: {fileID: 3271636163420555969, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 56954771}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95, type: 3}
 --- !u!20 &880216519 stripped
@@ -9386,7 +9426,7 @@ MonoBehaviour:
   latamanPointLight: {fileID: 2122175082}
   disabledVendingMachine: {fileID: 1409491269}
   enabledVendingMachine: {fileID: 4418473096679684137}
-  interactiontext: {fileID: 40717271}
+  interactionText: {fileID: 40717271}
 --- !u!4 &963217257
 Transform:
   m_ObjectHideFlags: 0
@@ -10191,6 +10231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionText: {fileID: 40717271}
+  isEnabled: 0
   latamanTrigger: {fileID: 1134171862}
 --- !u!64 &1069356624
 MeshCollider:
@@ -17738,6 +17779,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728851888}
   m_Mesh: {fileID: -125435165217083709, guid: b174f1f03d631fb4c9f4b11950fb3a25, type: 3}
+--- !u!4 &1732937556 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3271636163420555969, guid: c3c44d7a1e8aef3469f4d1b24a1fdf95,
+    type: 3}
+  m_PrefabInstance: {fileID: 880216518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1740363802
 GameObject:
   m_ObjectHideFlags: 0
