@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06232276, g: 0.06823305, b: 0.075496264, a: 1}
+  m_IndirectSpecularColor: {r: 0.06224496, g: 0.06814889, b: 0.07540018, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18272,6 +18272,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1530937240043784121, guid: 8f3117255fa8bc44b9eefa397cd5ba90,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.82292527
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530937240043784121, guid: 8f3117255fa8bc44b9eefa397cd5ba90,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530937240043784121, guid: 8f3117255fa8bc44b9eefa397cd5ba90,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.42
       objectReference: {fileID: 0}
@@ -18335,6 +18345,21 @@ PrefabInstance:
       propertyPath: coinSpawnPoint
       value: 
       objectReference: {fileID: 7005781259705636391}
+    - target: {fileID: 5348860440796316398, guid: 8f3117255fa8bc44b9eefa397cd5ba90,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.62877
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348860440796316398, guid: 8f3117255fa8bc44b9eefa397cd5ba90,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.62877
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348860440796316398, guid: 8f3117255fa8bc44b9eefa397cd5ba90,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.62877
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
