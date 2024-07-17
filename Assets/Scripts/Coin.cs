@@ -7,7 +7,10 @@ public class Coin : BaseGrabable
 {
     public bool enablesLataManTrigger = false;
     public GameObject latamanTrigger;
+    private AudioSource coinAudioSource;
 
+
+   
     public override void DisplayInteractionText()
     {
         interactionText.text = "E | Grab Coin";
@@ -23,5 +26,14 @@ public class Coin : BaseGrabable
                 latamanTrigger.SetActive(true);
         }
 
+    }
+
+    public void PlayCoinAudio ()
+    {
+        coinAudioSource = GetComponentInChildren<AudioSource>();
+
+        if (coinAudioSource != null && !coinAudioSource.isPlaying) {
+            coinAudioSource.Play();
+        }
     }
 }

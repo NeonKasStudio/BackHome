@@ -9,8 +9,7 @@ public class Toilet : BaseInteractable
 
     public AudioSource peeingSound;
     public Transform spawnPoint;
-    public GameObject Coin;
-    public AudioSource spawnCoinSound;
+    public GameObject coinPrefab;
     public bool isTheFirstTime = true;
     public GameObject coinToSpawn;
 
@@ -31,10 +30,13 @@ public class Toilet : BaseInteractable
         }
         if(isTheFirstTime)
         {
-            if (!spawnCoinSound.isPlaying)
-                spawnCoinSound.Play();
-
-            coinToSpawn.gameObject.SetActive(true);
+            
+            GameObject coin = Instantiate(coinPrefab, spawnPoint.position, spawnPoint.rotation);
+            Coin g_coin = coin.GetComponent<Coin>();
+            g_coin.interactionText = InteractionManager.Instance.interactionText;
+            g_coin.PlayCoinAudio();
+            isTheFirstTime=false;   
+            //coinToSpawn.gameObject.SetActive(true);
         }
     }
 }
