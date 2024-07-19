@@ -19,7 +19,7 @@ public class InteractionManager : MonoBehaviour
     private BaseGrabable currentGrabable;
     public bool shouldInteract = true;
     public TMP_Text interactionText;
-
+    public Vector3 hitColliderTest;
     public bool objectHasBeenThrow;
 
    
@@ -128,7 +128,7 @@ public class InteractionManager : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3.0f);
         BaseInteractable highestPriorityInteractable = null;
         InteractionPriority highestPriority = InteractionPriority.Low;
-
+        
         foreach (var hitCollider in hitColliders)
         {
             BaseInteractable interactable;
@@ -143,20 +143,46 @@ public class InteractionManager : MonoBehaviour
                 interactable = hitCollider.GetComponent<BaseInteractable>();
 
             }
-            if (interactable != null)
-            {
-                // Debug log para ver la prioridad del interactuable actual
 
-
-                // Comparar la prioridad del interactuable actual con la prioridad más alta encontrada hasta ahora
-                if (interactable.GetPriority() >= highestPriority)
+         
+                if (interactable != null)
                 {
-                    // Debug log para ver cuando se encuentra una nueva prioridad más alta
 
-                    // Actualizar la prioridad más alta y el objeto interactuable de mayor prioridad
-                    highestPriority = interactable.GetPriority();
-                    highestPriorityInteractable = interactable;
+                    Debug.Log("COLISIONO CON:" + hitCollider.gameObject.name);
+                    Vector3 directionToTarget = hitCollider.transform.position - Camera.main.transform.position;
+                    hitColliderTest = hitCollider.transform.position;
+                    Debug.Log("DIRECTION TO TARGET:" + directionToTarget);
+
+
+                // Proyectar el vector de dirección en el plano horizontal
+                directionToTarget.y = 0;
+                    Vector3 forwardDirection = Camera.main.transform.forward;
+                    forwardDirection.y = 0;
+
+
+                if (directionToTarget.sqrMagnitude > 0.01f)
+                    {
+                        directionToTarget.Normalize();
+                        forwardDirection.Normalize();
+                        float angle = Vector3.Angle(forwardDirection, directionToTarget);
+                    
+                    if (angle <= 60 / 2)
+                        {
+                            // Comparar la prioridad del interactuable actual con la prioridad más alta encontrada hasta ahora
+                            if (interactable.GetPriority() >= highestPriority)
+                            {
+                                // Debug log para ver cuando se encuentra una nueva prioridad más alta
+
+                                // Actualizar la prioridad más alta y el objeto interactuable de mayor prioridad
+                                highestPriority = interactable.GetPriority();
+                                highestPriorityInteractable = interactable;
+                            }
+                        }
+                    }
                 }
+            else
+            {
+                Debug.Log("No estoy en el angulo correcto");
             }
         }
         if(highestPriorityInteractable as Wrench) {
@@ -175,5 +201,22 @@ public class InteractionManager : MonoBehaviour
         {
             interactionText.text = string.Empty;
         }
+    }
+    void OnDrawGizmos()
+    {
+        // Configurar el color de los Gizmos
+        Gizmos.color = Color.yellow;
+
+        // Dibujar una esfera para mostrar el radio de interacción
+        Gizmos.DrawWireSphere(Camera.main.transform.position, 3.0f);
+
+        // Dibujar las líneas del campo de visión
+        Vector3 leftBoundary = Quaternion.Euler(0, -60 / 2, 0) * Camera.main.transform.forward * 3.0f;
+        Vector3 rightBoundary = Quaternion.Euler(0, 60 / 2, 0) * Camera.main.transform.forward * 3.0f;
+
+        Gizmos.DrawLine(Camera.main.transform.position, hitColliderTest);
+
+        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + leftBoundary);
+        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + rightBoundary);
     }
 }
