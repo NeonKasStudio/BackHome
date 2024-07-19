@@ -31,12 +31,15 @@ public class Toilet : BaseInteractable
         if(isTheFirstTime)
         {
             
-            GameObject coin = Instantiate(coinPrefab, spawnPoint.position, spawnPoint.rotation);
-            Coin g_coin = coin.GetComponent<Coin>();
-            g_coin.interactionText = InteractionManager.Instance.interactionText;
-            g_coin.PlayCoinAudio();
+            //GameObject coin = Instantiate(coinPrefab, spawnPoint.position, spawnPoint.rotation);
+            //Coin g_coin = coin.GetComponent<Coin>();
+            //g_coin.interactionText = InteractionManager.Instance.interactionText;
+            //g_coin.PlayCoinAudio();
             isTheFirstTime=false;   
-            //coinToSpawn.gameObject.SetActive(true);
+            coinToSpawn.gameObject.SetActive(true);
+            var coin = coinToSpawn.GetComponent<Coin>();
+            coin.interactionText = InteractionManager.Instance.interactionText;
+            coin.PlayCoinAudio();
         }
     }
 }

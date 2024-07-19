@@ -148,10 +148,10 @@ public class InteractionManager : MonoBehaviour
                 if (interactable != null)
                 {
 
-                    Debug.Log("COLISIONO CON:" + hitCollider.gameObject.name);
+                    //Debug.Log("COLISIONO CON:" + hitCollider.gameObject.name);
                     Vector3 directionToTarget = hitCollider.transform.position - Camera.main.transform.position;
                     hitColliderTest = hitCollider.transform.position;
-                    Debug.Log("DIRECTION TO TARGET:" + directionToTarget);
+                    //Debug.Log("DIRECTION TO TARGET:" + directionToTarget);
 
 
                 // Proyectar el vector de dirección en el plano horizontal
@@ -182,11 +182,11 @@ public class InteractionManager : MonoBehaviour
                 }
             else
             {
-                Debug.Log("No estoy en el angulo correcto");
+                //Debug.Log("No estoy en el angulo correcto");
             }
         }
         if(highestPriorityInteractable as Wrench) {
-            Debug.Log("TENEMOS UNA LLAVE INGLESA");
+            //Debug.Log("TENEMOS UNA LLAVE INGLESA");
         }
 
         // Si se ha encontrado un interactuable con la prioridad más alta, interactuar con él
