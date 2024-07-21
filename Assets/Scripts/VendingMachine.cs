@@ -189,10 +189,4 @@ public class VendingMachine : BaseInteractable
         if(playFX)
             powerOff.Play();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-            DisableVendingMachine(true, true);
-    }
 }
